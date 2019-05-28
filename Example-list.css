@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+header {
+  background-color: orange;
+  padding: 20px;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid red;
+}
+
+.input-type {
+  padding: 20px;
+  background-color: brown;
+  border: 5px solid black;
+}
+
+#list {
+  background-color: red;
+  height: 430px;
+  border: 5px solid orange;
+}
+
+#list p {
+  padding-left: 40px;
+  padding-top: 20px;
+  margin: 0;
+  width: 50px;
+  margin-bottom: -17px;
+}
+
+#btn1 {
+  margin-left: 200px;
+  margin-right: 10px;
+}

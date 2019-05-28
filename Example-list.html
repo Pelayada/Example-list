@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Example List</title>
+    <link rel="stylesheet" type="text/css" href="Example-list.css" media="screen" />
+    <script type="text/javascript">
+
+      function add() {
+        var introduce = document.getElementById('input-list').value;
+        var newP = document.createElement("P");
+        var newB1 = document.createElement("input");
+        var newB2 = document.createElement("input");
+
+        newP.innerHTML = introduce;
+
+        var newClass = document.getElementById("list").appendChild(newP);
+        var newBB1 = document.getElementById("list").appendChild(newB1);
+        var newBB2 = document.getElementById("list").appendChild(newB2);
+
+        newClass.setAttribute("class","classP");
+        newBB1.setAttribute("type","button");
+        newBB1.setAttribute("id","btn1");
+        newBB1.value = "Eliminar";
+        newBB2.setAttribute("type","button");
+        newBB2.setAttribute("id","btn2");
+        newBB2.value = "Modificar";
+
+
+        newBB1.addEventListener("click", function(){
+          console.log("Hello World");
+          var parent = document.getElementById("list");
+          parent.removeChild(newP);
+          parent.removeChild(newB1);
+          parent.removeChild(newB2);
+        });
+
+        newBB2.addEventListener("click", function(){
+          var newP1 = prompt("Escribe modificación.");
+          newP.innerText = newP1;
+
+
+        });
+      }
+
+
+    </script>
+  </head>
+
+
+  <body>
+    <header>
+
+      <h1 class="">
+        DOINGS
+      </h1>
+
+    </header>
+
+    <div class="input-type">
+
+      <input type="text" placeholder="Introduce" id="input-list">
+      <input type="button" value="Add you" onclick="add()">
+
+    </div>
+
+    <div id="list">
+
+    </div>
+
+
+
+  </body>
+</html>
