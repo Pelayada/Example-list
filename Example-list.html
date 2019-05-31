@@ -5,14 +5,14 @@
     <title>Example List</title>
     <link rel="stylesheet" type="text/css" href="Example-list.css" media="screen" />
     <script type="text/javascript">
+      var list;
 
-      function add() {
-        var introduce = document.getElementById('input-list').value;
+      function createListElement(text) {
         var newP = document.createElement("P");
         var newB1 = document.createElement("input");
         var newB2 = document.createElement("input");
 
-        newP.innerHTML = introduce;
+        newP.innerHTML = text;
 
         var newClass = document.getElementById("list").appendChild(newP);
         var newBB1 = document.getElementById("list").appendChild(newB1);
@@ -26,9 +26,7 @@
         newBB2.setAttribute("id","btn2");
         newBB2.value = "Modificar";
 
-
         newBB1.addEventListener("click", function(){
-          console.log("Hello World");
           var parent = document.getElementById("list");
           parent.removeChild(newP);
           parent.removeChild(newB1);
@@ -38,17 +36,41 @@
         newBB2.addEventListener("click", function(){
           var newP1 = prompt("Escribe modificación.");
           newP.innerText = newP1;
-
-
         });
       }
 
+      function cargarLocal() {
+        list = JSON.parse(localStorage.getItem("list"));
+        if (!list) {
+          list = [];
+        }
+        list.forEach(function(item) {
+          createListElement(item)
+        });
+      }
+
+      function clearStorage() {
+        localStorage.clear();
+        var list1 = document.getElementById("list")
+        while (list1.firstChild) {
+          list1.removeChild(list1.firstChild);
+        }
+      }
+
+      function add() {
+        var introduce = document.getElementById('input-list').value;
+        list.push(introduce);
+        console.log(list);
+        localStorage.setItem("list", JSON.stringify(list));
+        createListElement(introduce)
+        document.getElementById('input-list').value = "";
+      }
 
     </script>
   </head>
 
 
-  <body>
+  <body onload="cargarLocal()">
     <header>
 
       <h1 class="">
@@ -61,6 +83,7 @@
 
       <input type="text" placeholder="Introduce" id="input-list">
       <input type="button" value="Add you" onclick="add()">
+      <input type="button" value="Clear" onclick="clearStorage()">
 
     </div>
 
