@@ -20,10 +20,10 @@
 
         newClass.setAttribute("class","classP");
         newBB1.setAttribute("type","button");
-        newBB1.setAttribute("id","btn1");
+        newBB1.setAttribute("class","btn1");
         newBB1.value = "Eliminar";
         newBB2.setAttribute("type","button");
-        newBB2.setAttribute("id","btn2");
+        newBB2.setAttribute("class","btn2");
         newBB2.value = "Modificar";
 
         newBB1.addEventListener("click", function(){
@@ -31,11 +31,21 @@
           parent.removeChild(newP);
           parent.removeChild(newB1);
           parent.removeChild(newB2);
+          var indiceArray = list.indexOf(text);
+          list.splice(indiceArray,1);
+          console.log(list);
+          localStorage.setItem("list", JSON.stringify(list));
+
+
         });
 
         newBB2.addEventListener("click", function(){
           var newP1 = prompt("Escribe modificación.");
           newP.innerText = newP1;
+          var indiceArray = list.indexOf(text);
+          list.splice(indiceArray, 1, newP1);
+          localStorage.setItem("list", JSON.stringify(list));
+
         });
       }
 
@@ -66,6 +76,54 @@
         document.getElementById('input-list').value = "";
       }
 
+      function autocompletado () {
+            document.getElementById("demo").innerHTML = '';
+
+            var preguntas = [
+                "ActionScript",
+                "AppleScript",
+                "Asp",
+                "BASIC",
+                "C",
+                "C++",
+                "Clojure",
+                "COBOL",
+                "ColdFusion",
+                "Erlang",
+                "Fortran",
+                "Groovy",
+                "Haskell",
+                "Java",
+                "JavaScript",
+                "Lisp",
+                "Perl",
+                "PHP",
+                "Python",
+                "Ruby",
+                "Scala",
+                "Scheme"
+            ];
+
+            var pal = document.getElementById("buscar-pal").value;
+            var tam = pal.length;
+            for (indice in preguntas)  {
+                var nombre = preguntas[indice];
+                var str = nombre.substring(0,tam);
+                if(pal.length <= nombre.length && pal.length != 0 && nombre.length != 0){
+                    if(pal.toLowerCase() == str.toLowerCase())  {
+                        var node = document.createElement("LI");
+                        var textnode = document.createTextNode(preguntas[indice]);
+                        node.appendChild(textnode);
+                        document.getElementById("demo").appendChild(node);
+                    } else {
+                      alert('no')
+                    }
+                }
+            }
+        }
+
+
+
     </script>
   </head>
 
@@ -84,10 +142,12 @@
       <input type="text" placeholder="Introduce" id="input-list">
       <input type="button" value="Add you" onclick="add()">
       <input type="button" value="Clear" onclick="clearStorage()">
+      <input type="text" placeholder="Buscar" id="buscar-pal" onkeyup="autocompletado()" style="border: solid 2px">
 
     </div>
 
     <div id="list">
+
 
     </div>
 

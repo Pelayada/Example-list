@@ -33,7 +33,19 @@ header {
   margin-bottom: -17px;
 }
 
-#btn1 {
+p:nth-child(odd) {
+  background-color: purple;
+}
+
+p:nth-child(even) {
+  background-color: yellow;
+}
+
+.btn1 {
   margin-left: 200px;
   margin-right: 10px;
+}
+
+.btn1:hover, .btn2:hover  {
+  transform: scale(1.1,1.1);
 }
